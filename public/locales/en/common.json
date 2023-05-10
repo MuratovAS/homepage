@@ -794,5 +794,10 @@
         "digitalRelease": "Digital release",
         "noEventsToday": "No events for today!",
         "noEventsFound": "No events found"
+    },
+    "gitea": {
+        "repos": "Repositories",
+        "users": "Users",
+        "orgs": "Organizations"
     }
 }
