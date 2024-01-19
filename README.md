@@ -1,3 +1,9 @@
+This repository fork [gethomepage/homepage](https://github.com/gethomepage/homepage)
+
+Changes:
+- add syncthing widget
+- merge gitea widget 
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="images/banner_light@2x.png">
