@@ -360,6 +360,13 @@
         "dataRelayed": "Relayed",
         "transferRate": "Rate"
     },
+    "syncthing": {
+        "stored": "Stored",
+        "folders": "Folders",
+        "files": "Files",
+        "devices": "Devices",
+        "completion": "Completion"
+    },
     "mastodon": {
         "user_count": "Users",
         "status_count": "Posts",
