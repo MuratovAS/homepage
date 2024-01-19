@@ -24,6 +24,7 @@ import freshrss from "./freshrss/widget";
 import fritzbox from "./fritzbox/widget";
 import gamedig from "./gamedig/widget";
 import ghostfolio from "./ghostfolio/widget";
+import gitea from "./gitea/widget";
 import glances from "./glances/widget";
 import gluetun from "./gluetun/widget";
 import gotify from "./gotify/widget";
@@ -128,6 +129,7 @@ const widgets = {
   fritzbox,
   gamedig,
   ghostfolio,
+  gitea,
   glances,
   gluetun,
   gotify,

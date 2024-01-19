@@ -30,6 +30,7 @@ const components = {
   fritzbox: dynamic(() => import("./fritzbox/component")),
   gamedig: dynamic(() => import("./gamedig/component")),
   ghostfolio: dynamic(() => import("./ghostfolio/component")),
+  gitea: dynamic(() => import("./gitea/component")),
   glances: dynamic(() => import("./glances/component")),
   gluetun: dynamic(() => import("./gluetun/component")),
   gotify: dynamic(() => import("./gotify/component")),
