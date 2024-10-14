@@ -18,18 +18,18 @@ export default function Component({ service }) {
   if (!giteaData) {
     return (
       <Container service={service}>
-        <Block label="gitea.repos" />
-        <Block label="gitea.users" />
-        <Block label="gitea.orgs" />
+        <Block label="giteasrv.repos" />
+        <Block label="giteasrv.users" />
+        <Block label="giteasrv.orgs" />
       </Container>
     );
   }
 
   return (
     <Container service={service}>
-      <Block label="gitea.repos" value={t("common.number", { value: giteaData.repos })} />
-      <Block label="gitea.users" value={t("common.number", { value: giteaData.users })} />
-      <Block label="gitea.orgs" value={t("common.number", { value: giteaData.orgs })} />
+      <Block label="giteasrv.repos" value={t("common.number", { value: giteaData.repos })} />
+      <Block label="giteasrv.users" value={t("common.number", { value: giteaData.users })} />
+      <Block label="giteasrv.orgs" value={t("common.number", { value: giteaData.orgs })} />
     </Container>
   );
 }
