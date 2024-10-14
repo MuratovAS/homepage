@@ -157,6 +157,7 @@ const widgets = {
   gatus,
   ghostfolio,
   gitea,
+  giteasrv,
   glances,
   gluetun,
   gotify,
