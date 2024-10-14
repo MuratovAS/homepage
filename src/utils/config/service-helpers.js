@@ -38,7 +38,7 @@ export async function servicesFromConfig() {
   // add default weight to services based on their position in the configuration
   servicesArray.forEach((group, groupIndex) => {
     group.services.forEach((service, serviceIndex) => {
-      if (!service.weight) {
+      if (service.weight === undefined) {
         servicesArray[groupIndex].services[serviceIndex].weight = (serviceIndex + 1) * 100;
       }
     });
@@ -102,11 +102,23 @@ export async function servicesFromDocker() {
             }
           });
 
+          if (constructedService && (!constructedService.name || !constructedService.group)) {
+            logger.error(
+              `Error constructing service using homepage labels for container '${containerName.replace(
+                /^\//,
+                "",
+              )}'. Ensure required labels are present.`,
+            );
+            return null;
+          }
+
           return constructedService;
         });
 
         return { server: serverName, services: discovered.filter((filteredService) => filteredService) };
       } catch (e) {
+        logger.error("Error getting services from Docker server '%s': %s", serverName, e);
+
         // a server failed, but others may succeed
         return { server: serverName, services: [] };
       }
@@ -186,6 +198,7 @@ export async function servicesFromKubernetes() {
       .then((response) => response.body)
       .catch((error) => {
         logger.error("Error getting ingresses: %d %s %s", error.statusCode, error.body, error.response);
+        logger.debug(error);
         return null;
       });
 
@@ -203,6 +216,7 @@ export async function servicesFromKubernetes() {
             error.body,
             error.response,
           );
+          logger.debug(error);
         }
 
         return [];
@@ -219,6 +233,7 @@ export async function servicesFromKubernetes() {
             error.body,
             error.response,
           );
+          logger.debug(error);
         }
 
         return [];
@@ -242,7 +257,8 @@ export async function servicesFromKubernetes() {
           ingress.metadata.annotations &&
           ingress.metadata.annotations[`${ANNOTATION_BASE}/enabled`] === "true" &&
           (!ingress.metadata.annotations[`${ANNOTATION_BASE}/instance`] ||
-            ingress.metadata.annotations[`${ANNOTATION_BASE}/instance`] === instanceName),
+            ingress.metadata.annotations[`${ANNOTATION_BASE}/instance`] === instanceName ||
+            `${ANNOTATION_BASE}/instance.${instanceName}` in ingress.metadata.annotations),
       )
       .map((ingress) => {
         let constructedService = {
@@ -287,6 +303,7 @@ export async function servicesFromKubernetes() {
           constructedService = JSON.parse(substituteEnvironmentVars(JSON.stringify(constructedService)));
         } catch (e) {
           logger.error("Error attempting k8s environment variable substitution.");
+          logger.debug(e);
         }
 
         return constructedService;
@@ -315,7 +332,7 @@ export async function servicesFromKubernetes() {
 
     return mappedServiceGroups;
   } catch (e) {
-    logger.error(e);
+    if (e) logger.error(e);
     throw e;
   }
 }
@@ -358,6 +375,7 @@ export function cleanServiceGroups(groups) {
           showTime,
           previousDays,
           view,
+          timezone,
 
           // coinmarketcap
           currency,
@@ -367,6 +385,7 @@ export function cleanServiceGroups(groups) {
 
           // customapi
           mappings,
+          display,
 
           // diskstation
           volume,
@@ -379,13 +398,31 @@ export function cleanServiceGroups(groups) {
           enableBlocks,
           enableNowPlaying,
 
+          // emby, jellyfin, tautulli
+          enableUser,
+          expandOneStreamToTwoRows,
+          showEpisodeNumber,
+
+          // frigate
+          enableRecentEvents,
+
+          // glances, mealie, pihole, pfsense
+          version,
+
           // glances
           chart,
           metric,
           pointsLimit,
+          diskUnits,
 
           // glances, customapi, iframe
           refreshInterval,
+
+          // hdhomerun
+          tuner,
+
+          // healthchecks
+          uuid,
 
           // iframe
           allowFullscreen,
@@ -405,6 +442,9 @@ export function cleanServiceGroups(groups) {
           namespace,
           podSelector,
 
+          // lubelogger
+          vehicleID,
+
           // mjpeg
           fit,
           stream,
@@ -412,23 +452,43 @@ export function cleanServiceGroups(groups) {
           // openmediavault
           method,
 
+          // openwrt
+          interfaceName,
+
           // opnsense, pfsense
           wan,
 
           // proxmox
           node,
 
+          // speedtest
+          bitratePrecision,
+
           // sonarr, radarr
           enableQueue,
 
+          // stocks
+          watchlist,
+          showUSMarketStatus,
+
+          // truenas
+          enablePools,
+          nasType,
+
           // unifi
           site,
+
+          // wgeasy
+          threshold,
+
+          // technitium
+          range,
         } = cleanedService.widget;
 
         let fieldsList = fields;
         if (typeof fields === "string") {
           try {
-            JSON.parse(fields);
+            fieldsList = JSON.parse(fields);
           } catch (e) {
             logger.error("Invalid fields list detected in config for service '%s'", service.name);
             fieldsList = null;
@@ -487,8 +547,19 @@ export function cleanServiceGroups(groups) {
           if (enableBlocks !== undefined) cleanedService.widget.enableBlocks = JSON.parse(enableBlocks);
           if (enableNowPlaying !== undefined) cleanedService.widget.enableNowPlaying = JSON.parse(enableNowPlaying);
         }
+        if (["emby", "jellyfin", "tautulli"].includes(type)) {
+          if (expandOneStreamToTwoRows !== undefined)
+            cleanedService.widget.expandOneStreamToTwoRows = !!JSON.parse(expandOneStreamToTwoRows);
+          if (showEpisodeNumber !== undefined)
+            cleanedService.widget.showEpisodeNumber = !!JSON.parse(showEpisodeNumber);
+          if (enableUser !== undefined) cleanedService.widget.enableUser = !!JSON.parse(enableUser);
+        }
         if (["sonarr", "radarr"].includes(type)) {
           if (enableQueue !== undefined) cleanedService.widget.enableQueue = JSON.parse(enableQueue);
+        }
+        if (type === "truenas") {
+          if (enablePools !== undefined) cleanedService.widget.enablePools = JSON.parse(enablePools);
+          if (nasType !== undefined) cleanedService.widget.nasType = nasType;
         }
         if (["diskstation", "qnap"].includes(type)) {
           if (volume) cleanedService.widget.volume = volume;
@@ -496,6 +567,9 @@ export function cleanServiceGroups(groups) {
         if (type === "kopia") {
           if (snapshotHost) cleanedService.widget.snapshotHost = snapshotHost;
           if (snapshotPath) cleanedService.widget.snapshotPath = snapshotPath;
+        }
+        if (["glances", "mealie", "pfsense", "pihole"].includes(type)) {
+          if (version) cleanedService.widget.version = version;
         }
         if (type === "glances") {
           if (metric) cleanedService.widget.metric = metric;
@@ -506,6 +580,7 @@ export function cleanServiceGroups(groups) {
           }
           if (refreshInterval) cleanedService.widget.refreshInterval = refreshInterval;
           if (pointsLimit) cleanedService.widget.pointsLimit = pointsLimit;
+          if (diskUnits) cleanedService.widget.diskUnits = diskUnits;
         }
         if (type === "mjpeg") {
           if (stream) cleanedService.widget.stream = stream;
@@ -514,8 +589,12 @@ export function cleanServiceGroups(groups) {
         if (type === "openmediavault") {
           if (method) cleanedService.widget.method = method;
         }
+        if (type === "openwrt") {
+          if (interfaceName) cleanedService.widget.interfaceName = interfaceName;
+        }
         if (type === "customapi") {
           if (mappings) cleanedService.widget.mappings = mappings;
+          if (display) cleanedService.widget.display = display;
           if (refreshInterval) cleanedService.widget.refreshInterval = refreshInterval;
         }
         if (type === "calendar") {
@@ -525,6 +604,34 @@ export function cleanServiceGroups(groups) {
           if (maxEvents) cleanedService.widget.maxEvents = maxEvents;
           if (previousDays) cleanedService.widget.previousDays = previousDays;
           if (showTime) cleanedService.widget.showTime = showTime;
+          if (timezone) cleanedService.widget.timezone = timezone;
+        }
+        if (type === "hdhomerun") {
+          if (tuner !== undefined) cleanedService.widget.tuner = tuner;
+        }
+        if (type === "healthchecks") {
+          if (uuid !== undefined) cleanedService.widget.uuid = uuid;
+        }
+        if (type === "speedtest") {
+          if (bitratePrecision !== undefined) {
+            cleanedService.widget.bitratePrecision = parseInt(bitratePrecision, 10);
+          }
+        }
+        if (type === "stocks") {
+          if (watchlist) cleanedService.widget.watchlist = watchlist;
+          if (showUSMarketStatus) cleanedService.widget.showUSMarketStatus = showUSMarketStatus;
+        }
+        if (type === "wgeasy") {
+          if (threshold !== undefined) cleanedService.widget.threshold = parseInt(threshold, 10);
+        }
+        if (type === "frigate") {
+          if (enableRecentEvents !== undefined) cleanedService.widget.enableRecentEvents = enableRecentEvents;
+        }
+        if (type === "technitium") {
+          if (range !== undefined) cleanedService.widget.range = range;
+        }
+        if (type === "lubelogger") {
+          if (vehicleID !== undefined) cleanedService.widget.vehicleID = vehicleID;
         }
       }
 

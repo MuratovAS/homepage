@@ -12,12 +12,13 @@
         "number": "{{value, number}}",
         "ms": "{{value, number}}",
         "date": "{{value, date}}",
+        "relativeDate": "{{value, relativeDate}}",
         "uptime": "{{value, uptime}}",
-        "months": "mo",
-        "days": "d",
-        "hours": "h",
-        "minutes": "m",
-        "seconds": "s"
+        "months": "мес",
+        "days": "дней",
+        "hours": "час",
+        "minutes": "мин",
+        "seconds": "сек"
     },
     "widget": {
         "missing_type": "Отсутствует тип виджета: {{type}}",
@@ -38,7 +39,7 @@
         "placeholder": "Поиск…"
     },
     "resources": {
-        "cpu": "ЦПУ",
+        "cpu": "ЦП",
         "mem": "ОЗУ",
         "total": "Всего",
         "free": "Свободно",
@@ -69,7 +70,7 @@
         "rx": "RX",
         "tx": "TX",
         "mem": "ОЗУ",
-        "cpu": "ЦПУ",
+        "cpu": "ЦП",
         "running": "Запущено",
         "offline": "Не в сети",
         "error": "Ошибка",
@@ -106,6 +107,13 @@
         "episodes": "Эпизоды",
         "songs": "Песни"
     },
+    "esphome": {
+        "offline": "Не в сети",
+        "offline_alt": "Не в сети",
+        "online": "В сети",
+        "total": "Всего",
+        "unknown": "Неизвестен"
+    },
     "evcc": {
         "pv_power": "Прод",
         "battery_soc": "Питание",
@@ -129,7 +137,7 @@
         "connectionStatusUnconfigured": "Не настроено",
         "connectionStatusConnecting": "Подключение",
         "connectionStatusAuthenticating": "Авторизация",
-        "connectionStatusPendingDisconnect": "Pending Disconnect",
+        "connectionStatusPendingDisconnect": "Ожидает отключения",
         "connectionStatusDisconnecting": "Отключение",
         "connectionStatusDisconnected": "Отключено",
         "connectionStatusConnected": "Подключено",
@@ -218,6 +226,10 @@
         "leech": "Лич",
         "seed": "Сид"
     },
+    "develancacheui": {
+        "cachehitbytes": "Cache Hit Bytes",
+        "cachemissbytes": "Cache Miss Bytes"
+    },
     "downloadstation": {
         "download": "Скачивание",
         "upload": "Загрузка",
@@ -269,10 +281,10 @@
         "approved": "Одобрено",
         "available": "Доступно"
     },
-    "pialert": {
+    "netalertx": {
         "total": "Всего",
         "connected": "Подключено",
-        "new_devices": "Новые устройства",
+        "new_devices": "Новое устройство",
         "down_alerts": "Оповещение о недоступности"
     },
     "pihole": {
@@ -310,6 +322,19 @@
         "minutes": "{{number}}м",
         "seconds": "{{number}}с",
         "ago": "{{value}} назад"
+    },
+    "technitium": {
+        "totalQueries": "Запросы",
+        "totalNoError": "Success",
+        "totalServerFailure": "Failures",
+        "totalNxDomain": "NX Domains",
+        "totalRefused": "Refused",
+        "totalAuthoritative": "Authoritative",
+        "totalRecursive": "Recursive",
+        "totalCached": "Cached",
+        "totalBlocked": "Заблокировано",
+        "totalDropped": "Dropped",
+        "totalClients": "Клиенты"
     },
     "tdarr": {
         "queue": "Очередь",
@@ -388,12 +413,12 @@
     },
     "proxmox": {
         "mem": "ОЗУ",
-        "cpu": "ЦПУ",
+        "cpu": "ЦП",
         "lxc": "LXC",
         "vms": "Виртуальные машины"
     },
     "glances": {
-        "cpu": "ЦПУ",
+        "cpu": "ЦП",
         "load": "Загрузка",
         "wait": "Пожалуйста, подождите",
         "temp": "Температура",
@@ -403,8 +428,8 @@
         "total": "Всего",
         "free": "Свободно",
         "used": "Использовано",
-        "days": "d",
-        "hours": "h",
+        "days": "дней",
+        "hours": "час",
         "crit": "Крит",
         "read": "Прочитано",
         "write": "Запись",
@@ -418,7 +443,8 @@
         "search": "Поиск",
         "custom": "Пользовательский",
         "visit": "Посетите",
-        "url": "Ссылка"
+        "url": "Ссылка",
+        "searchsuggestion": "Предложение"
     },
     "wmo": {
         "0-day": "Солнечно",
@@ -491,9 +517,9 @@
     },
     "healthchecks": {
         "new": "Новый",
-        "up": "В сети",
+        "up": "Онлайн",
         "grace": "Пробный период",
-        "down": "Не в сети",
+        "down": "Офлайн",
         "paused": "Приостановлено",
         "status": "Статус",
         "last_ping": "Последний пинг",
@@ -534,7 +560,15 @@
     },
     "hdhomerun": {
         "channels": "Каналы",
-        "hd": "HD"
+        "hd": "HD",
+        "tunerCount": "Тюнеры",
+        "channelNumber": "Канал",
+        "channelNetwork": "Сеть",
+        "signalStrength": "Сила",
+        "signalQuality": "Качество",
+        "symbolQuality": "Качество",
+        "networkRate": "Битрейт",
+        "clientIP": "Клиент"
     },
     "scrutiny": {
         "passed": "Успешно",
@@ -546,12 +580,12 @@
         "total": "Всего"
     },
     "peanut": {
-        "battery_charge": "Battery Charge",
-        "ups_load": "UPS Load",
-        "ups_status": "UPS Status",
+        "battery_charge": "Заряд батареи",
+        "ups_load": "Нагрузка на UPS",
+        "ups_status": "Статус UPS",
         "online": "В сети",
-        "on_battery": "On Battery",
-        "low_battery": "Low Battery"
+        "on_battery": "От батареи",
+        "low_battery": "Низкий заряд"
     },
     "nextdns": {
         "wait": "Пожалуйста, подождите",
@@ -609,7 +643,7 @@
     "proxmoxbackupserver": {
         "datastore_usage": "Хранилище данных",
         "failed_tasks_24h": "Неудачные задачи 24 часа",
-        "cpu_usage": "ЦПУ",
+        "cpu_usage": "ЦП",
         "memory_usage": "ОЗУ"
     },
     "immich": {
@@ -623,7 +657,7 @@
         "down": "Неактивные сайты",
         "uptime": "Время работы",
         "incident": "Происшествия",
-        "m": "m"
+        "m": "мин"
     },
     "atsumeru": {
         "series": "Серии",
@@ -692,6 +726,11 @@
         "targets_up": "Активные цели",
         "targets_down": "Неактивные цели",
         "targets_total": "Всего целей"
+    },
+    "gatus": {
+        "up": "Активные сайты",
+        "down": "Неактивные сайты",
+        "uptime": "Время работы"
     },
     "ghostfolio": {
         "gross_percent_today": "Сегодня",
@@ -774,6 +813,14 @@
         "passed": "Успешно",
         "failed": "Провалено"
     },
+    "openwrt": {
+        "uptime": "Время работы",
+        "cpuLoad": "Средняя нагрузка ЦП (5м)",
+        "up": "Онлайн",
+        "down": "Офлайн",
+        "bytesTx": "Передано",
+        "bytesRx": "Получено"
+    },
     "uptimerobot": {
         "status": "Статус",
         "uptime": "Время работы",
@@ -794,5 +841,117 @@
         "digitalRelease": "Цифровой релиз",
         "noEventsToday": "Нет событий на сегодня!",
         "noEventsFound": "Событий не найдено"
+    },
+    "romm": {
+        "platforms": "Платформы",
+        "totalRoms": "Games",
+        "saves": "Saves",
+        "states": "States",
+        "screenshots": "Screenshots",
+        "totalfilesize": "Total Size"
+    },
+    "mailcow": {
+        "domains": "Домены",
+        "mailboxes": "Mailboxes",
+        "mails": "Mails",
+        "storage": "Хранилище"
+    },
+    "netdata": {
+        "warnings": "Предупреждения",
+        "criticals": "Критические"
+    },
+    "plantit": {
+        "events": "События",
+        "plants": "Растения",
+        "photos": "Фото",
+        "species": "Виды"
+    },
+    "gitea": {
+        "notifications": "Уведомления",
+        "issues": "Вопросы",
+        "pulls": "Запросы на слияние (Pull Request)"
+    },
+    "stash": {
+        "scenes": "Сцены",
+        "scenesPlayed": "Проигранных сцен",
+        "playCount": "Всего проиграно",
+        "playDuration": "Просмотрено времени",
+        "sceneSize": "Размер сцены",
+        "sceneDuration": "Длительность сцен",
+        "images": "Изображения",
+        "imageSize": "Размер изображений",
+        "galleries": "Галереи",
+        "performers": "Исполнители",
+        "studios": "Студии",
+        "movies": "Фильмы",
+        "tags": "Теги",
+        "oCount": "0"
+    },
+    "tandoor": {
+        "users": "Пользователи",
+        "recipes": "Рецепты",
+        "keywords": "Ключевые слова"
+    },
+    "homebox": {
+        "items": "Элементы",
+        "totalWithWarranty": "С гарантией",
+        "locations": "Местоположения",
+        "labels": "Ярлыки",
+        "users": "Пользователи",
+        "totalValue": "Общая стоимость"
+    },
+    "crowdsec": {
+        "alerts": "Предупреждения",
+        "bans": "Запреты"
+    },
+    "wgeasy": {
+        "connected": "Подключено",
+        "enabled": "Включено",
+        "disabled": "Выключено",
+        "total": "Всего"
+    },
+    "swagdashboard": {
+        "proxied": "Proxied",
+        "auth": "With Auth",
+        "outdated": "Outdated",
+        "banned": "Banned"
+    },
+    "myspeed": {
+        "ping": "Пинг",
+        "download": "Скачивание",
+        "upload": "Загрузка"
+    },
+    "stocks": {
+        "stocks": "Stocks",
+        "loading": "Loading",
+        "open": "Open - US Market",
+        "closed": "Closed - US Market",
+        "invalidConfiguration": "Invalid Configuration"
+    },
+    "frigate": {
+        "cameras": "Cameras",
+        "uptime": "Время работы",
+        "version": "Версия"
+    },
+    "linkwarden": {
+        "links": "Links",
+        "collections": "Collections",
+        "tags": "Теги"
+    },
+    "zabbix": {
+        "unclassified": "Not classified",
+        "information": "Информация",
+        "warning": "Warning",
+        "average": "Average",
+        "high": "High",
+        "disaster": "Disaster"
+    },
+    "lubelogger": {
+        "vehicle": "Vehicle",
+        "vehicles": "Vehicles",
+        "serviceRecords": "Service Records",
+        "reminders": "Reminders",
+        "nextReminder": "Next Reminder",
+        "none": "None"
     }
 }

@@ -1,35 +1,32 @@
-import { useTranslation } from "next-i18next";
-
 import Container from "components/services/widget/container";
 import Block from "components/services/widget/block";
 import useWidgetAPI from "utils/proxy/use-widget-api";
 
 export default function Component({ service }) {
-  const { t } = useTranslation();
-
   const { widget } = service;
 
-  const { data: giteaData, error: giteaError } = useWidgetAPI(widget);
+  const { data: giteaNotifications, error: giteaNotificationsError } = useWidgetAPI(widget, "notifications");
+  const { data: giteaIssues, error: giteaIssuesError } = useWidgetAPI(widget, "issues");
 
-  if (giteaError) {
-    return <Container service={service} error={giteaError} />;
+  if (giteaNotificationsError || giteaIssuesError) {
+    return <Container service={service} error={giteaNotificationsError ?? giteaIssuesError} />;
   }
 
-  if (!giteaData) {
+  if (!giteaNotifications || !giteaIssues) {
     return (
       <Container service={service}>
-        <Block label="gitea.repos" />
-        <Block label="gitea.users" />
-        <Block label="gitea.orgs" />
+        <Block label="gitea.notifications" />
+        <Block label="gitea.issues" />
+        <Block label="gitea.pulls" />
       </Container>
     );
   }
 
   return (
     <Container service={service}>
-      <Block label="gitea.repos" value={t("common.number", { value: giteaData.repos })} />
-      <Block label="gitea.users" value={t("common.number", { value: giteaData.users })} />
-      <Block label="gitea.orgs" value={t("common.number", { value: giteaData.orgs })} />
+      <Block label="gitea.notifications" value={giteaNotifications.length} />
+      <Block label="gitea.issues" value={giteaIssues.issues.length} />
+      <Block label="gitea.pulls" value={giteaIssues.pulls.length} />
     </Container>
   );
 }

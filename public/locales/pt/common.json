@@ -12,11 +12,12 @@
         "number": "{{value, number}}",
         "ms": "{{value, number}}",
         "date": "{{value, date}}",
+        "relativeDate": "{{value, relativeDate}}",
         "uptime": "{{value, uptime}}",
-        "months": "mo",
+        "months": "mês",
         "days": "d",
         "hours": "h",
-        "minutes": "m",
+        "minutes": "min",
         "seconds": "s"
     },
     "widget": {
@@ -30,7 +31,7 @@
     },
     "weather": {
         "current": "Localização atual",
-        "allow": "Clicar para permitir",
+        "allow": "Clique para permitir",
         "updating": "Atualizando",
         "wait": "Por favor aguarde"
     },
@@ -106,6 +107,13 @@
         "episodes": "Episódios",
         "songs": "Canções"
     },
+    "esphome": {
+        "offline": "Desligado",
+        "offline_alt": "Desligado",
+        "online": "Online",
+        "total": "Total",
+        "unknown": "Desconhecido"
+    },
     "evcc": {
         "pv_power": "Produção",
         "battery_soc": "Bateria",
@@ -126,21 +134,21 @@
     },
     "fritzbox": {
         "connectionStatus": "Estado",
-        "connectionStatusUnconfigured": "Unconfigured",
-        "connectionStatusConnecting": "Connecting",
-        "connectionStatusAuthenticating": "Authenticating",
-        "connectionStatusPendingDisconnect": "Pending Disconnect",
-        "connectionStatusDisconnecting": "Disconnecting",
-        "connectionStatusDisconnected": "Disconnected",
+        "connectionStatusUnconfigured": "Não configurado",
+        "connectionStatusConnecting": "A conectar",
+        "connectionStatusAuthenticating": "Autenticando",
+        "connectionStatusPendingDisconnect": "Desconexão pendente",
+        "connectionStatusDisconnecting": "Desconectando",
+        "connectionStatusDisconnected": "Desconectado",
         "connectionStatusConnected": "Conectado",
         "uptime": "Ligado",
-        "maxDown": "Max. Down",
-        "maxUp": "Max. Up",
+        "maxDown": "Máx. de Descarga",
+        "maxUp": "Max. de Envio",
         "down": "Down",
         "up": "Up",
-        "received": "Received",
-        "sent": "Sent",
-        "externalIPAddress": "Ext. IP"
+        "received": "Recebido",
+        "sent": "Enviado",
+        "externalIPAddress": "Endereço IP externo"
     },
     "caddy": {
         "upstreams": "Upstreams",
@@ -218,6 +226,10 @@
         "leech": "Leech",
         "seed": "Semente"
     },
+    "develancacheui": {
+        "cachehitbytes": "Cache Hit Bytes",
+        "cachemissbytes": "Cache Miss Bytes"
+    },
     "downloadstation": {
         "download": "Descarregar",
         "upload": "Carregar",
@@ -269,11 +281,11 @@
         "approved": "Aprovada",
         "available": "Disponível"
     },
-    "pialert": {
+    "netalertx": {
         "total": "Total",
         "connected": "Conectado",
         "new_devices": "Novos dispositivos",
-        "down_alerts": "Alertas de Baixo"
+        "down_alerts": "Alertas de Falha"
     },
     "pihole": {
         "queries": "Consultas",
@@ -310,6 +322,19 @@
         "minutes": "{{number}}m",
         "seconds": "{{number}}s",
         "ago": "{{value}} Atrás"
+    },
+    "technitium": {
+        "totalQueries": "Consultas",
+        "totalNoError": "Success",
+        "totalServerFailure": "Failures",
+        "totalNxDomain": "NX Domains",
+        "totalRefused": "Refused",
+        "totalAuthoritative": "Authoritative",
+        "totalRecursive": "Recursive",
+        "totalCached": "Cached",
+        "totalBlocked": "Bloqueado",
+        "totalDropped": "Dropped",
+        "totalClients": "Clientes"
     },
     "tdarr": {
         "queue": "Fila",
@@ -418,7 +443,8 @@
         "search": "Busca",
         "custom": "Personalizado",
         "visit": "Visitar",
-        "url": "Endereço URL"
+        "url": "Endereço URL",
+        "searchsuggestion": "Sugestão"
     },
     "wmo": {
         "0-day": "Solarengo",
@@ -439,20 +465,20 @@
         "53-night": "Chuvisco",
         "55-day": "Aguaceiro Forte",
         "55-night": "Aguaceiro Forte",
-        "56-day": "Leve Garoa Congelante",
-        "56-night": "Leve Garoa Congelante",
-        "57-day": "Garoa Congelante",
-        "57-night": "Garoa Congelante",
+        "56-day": "Granizo Leve",
+        "56-night": "Granizo Leve",
+        "57-day": "Granizo",
+        "57-night": "Granizo",
         "61-day": "Chuva fraca",
         "61-night": "Chuva fraca",
         "63-day": "Chuva",
         "63-night": "Chuva",
         "65-day": "Chuva forte",
         "65-night": "Chuva forte",
-        "66-day": "Chuva Congelante",
-        "66-night": "Chuva Congelante",
-        "67-day": "Chuva Congelante",
-        "67-night": "Chuva Congelante",
+        "66-day": "Granizo",
+        "66-night": "Granizo",
+        "67-day": "Granizo",
+        "67-night": "Granizo",
         "71-day": "Neve fraca",
         "71-night": "Neve fraca",
         "73-day": "Neve",
@@ -491,9 +517,9 @@
     },
     "healthchecks": {
         "new": "Novo",
-        "up": "Online",
+        "up": "Up",
         "grace": "Em Período Gratuito",
-        "down": "Desligado",
+        "down": "Down",
         "paused": "Pausado",
         "status": "Estado",
         "last_ping": "Ultimo Ping",
@@ -534,7 +560,15 @@
     },
     "hdhomerun": {
         "channels": "Canais",
-        "hd": "HD"
+        "hd": "HD",
+        "tunerCount": "Sintonizadores",
+        "channelNumber": "Canal",
+        "channelNetwork": "Rede",
+        "signalStrength": "Potência",
+        "signalQuality": "Qualidade",
+        "symbolQuality": "Qualidade",
+        "networkRate": "Taxa de bits",
+        "clientIP": "Cliente"
     },
     "scrutiny": {
         "passed": "Aprovado",
@@ -546,12 +580,12 @@
         "total": "Total"
     },
     "peanut": {
-        "battery_charge": "Battery Charge",
-        "ups_load": "UPS Load",
-        "ups_status": "UPS Status",
+        "battery_charge": "Carga da bateria",
+        "ups_load": "Carga da UPS",
+        "ups_status": "Estado da UPS",
         "online": "Online",
-        "on_battery": "On Battery",
-        "low_battery": "Low Battery"
+        "on_battery": "Em bateria",
+        "low_battery": "Bateria Fraca"
     },
     "nextdns": {
         "wait": "Por favor aguarde",
@@ -623,7 +657,7 @@
         "down": "Sites Fora do Ar",
         "uptime": "Ligado",
         "incident": "Incidente",
-        "m": "m"
+        "m": "min"
     },
     "atsumeru": {
         "series": "Séries",
@@ -692,6 +726,11 @@
         "targets_up": "Alvo ativo",
         "targets_down": "Alvo inativo",
         "targets_total": "Total de Alvos"
+    },
+    "gatus": {
+        "up": "Sites no Ar",
+        "down": "Sites Fora do Ar",
+        "uptime": "Ligado"
     },
     "ghostfolio": {
         "gross_percent_today": "Hoje",
@@ -774,6 +813,14 @@
         "passed": "Aprovado",
         "failed": "Falhou"
     },
+    "openwrt": {
+        "uptime": "Ligado",
+        "cpuLoad": "Carga da CPU média (5m)",
+        "up": "Up",
+        "down": "Down",
+        "bytesTx": "Transmitido",
+        "bytesRx": "Recebido"
+    },
     "uptimerobot": {
         "status": "Estado",
         "uptime": "Ligado",
@@ -793,6 +840,118 @@
         "physicalRelease": "Lançamento físico",
         "digitalRelease": "Lançamento digital",
         "noEventsToday": "Não existem eventos hoje!",
-        "noEventsFound": "No events found"
+        "noEventsFound": "Nenhum evento encontrado"
+    },
+    "romm": {
+        "platforms": "Plataformas",
+        "totalRoms": "Games",
+        "saves": "Saves",
+        "states": "States",
+        "screenshots": "Screenshots",
+        "totalfilesize": "Total Size"
+    },
+    "mailcow": {
+        "domains": "Domínios",
+        "mailboxes": "Mailboxes",
+        "mails": "Mails",
+        "storage": "Armazenamento"
+    },
+    "netdata": {
+        "warnings": "Avisos",
+        "criticals": "Críticos"
+    },
+    "plantit": {
+        "events": "Eventos",
+        "plants": "Plantas",
+        "photos": "Fotos",
+        "species": "Espécies"
+    },
+    "gitea": {
+        "notifications": "Notificações",
+        "issues": "Problemas",
+        "pulls": "Solicitar pull"
+    },
+    "stash": {
+        "scenes": "Cenas",
+        "scenesPlayed": "Cenas reproduzidas",
+        "playCount": "Total de Reproduções",
+        "playDuration": "Tempo Assistido",
+        "sceneSize": "Tamanho das cenas",
+        "sceneDuration": "Duração das cenas",
+        "images": "Imagens",
+        "imageSize": "Tamanho das imagens",
+        "galleries": "Galerias",
+        "performers": "Artistas",
+        "studios": "Estúdios",
+        "movies": "Filmes",
+        "tags": "Etiquetas",
+        "oCount": "Contagem de O's"
+    },
+    "tandoor": {
+        "users": "Utilizadores",
+        "recipes": "Receitas",
+        "keywords": "Palavras-chave"
+    },
+    "homebox": {
+        "items": "Items",
+        "totalWithWarranty": "Com Garantia",
+        "locations": "Localizações",
+        "labels": "Etiquetas",
+        "users": "Utilizadores",
+        "totalValue": "Valor Total"
+    },
+    "crowdsec": {
+        "alerts": "Alertas",
+        "bans": "Banidos"
+    },
+    "wgeasy": {
+        "connected": "Conectado",
+        "enabled": "Ativo",
+        "disabled": "Desabilitado",
+        "total": "Total"
+    },
+    "swagdashboard": {
+        "proxied": "Com proxy",
+        "auth": "Com Autorização",
+        "outdated": "Desatualizado",
+        "banned": "Banido"
+    },
+    "myspeed": {
+        "ping": "Tempo de resposta",
+        "download": "Descarregar",
+        "upload": "Carregar"
+    },
+    "stocks": {
+        "stocks": "Ações",
+        "loading": "Carregando",
+        "open": "Aberto - Mercado dos EUA",
+        "closed": "Fechado - Mercado dos EUA",
+        "invalidConfiguration": "Configuração inválida"
+    },
+    "frigate": {
+        "cameras": "Câmaras",
+        "uptime": "Ligado",
+        "version": "Versão"
+    },
+    "linkwarden": {
+        "links": "Links",
+        "collections": "Collections",
+        "tags": "Etiquetas"
+    },
+    "zabbix": {
+        "unclassified": "Not classified",
+        "information": "Informação",
+        "warning": "Warning",
+        "average": "Average",
+        "high": "High",
+        "disaster": "Disaster"
+    },
+    "lubelogger": {
+        "vehicle": "Vehicle",
+        "vehicles": "Vehicles",
+        "serviceRecords": "Service Records",
+        "reminders": "Reminders",
+        "nextReminder": "Next Reminder",
+        "none": "None"
     }
 }
